@@ -33,18 +33,18 @@
 
 :root {
   color-scheme: dark;
-  --background: #05070f;
-  --foreground: #e6f1ff;
-  --card: #0a1022;
-  --card-foreground: #e6f1ff;
-  --primary: #22e4ff;
-  --primary-foreground: #03121a;
-  --secondary: #9b5cff;
-  --accent: #ff3fd0;
-  --muted: #111a33;
-  --muted-foreground: #93a4c3;
-  --border: #1c2a4d;
-  --radius: 0.5rem;
+  --background: #07040d;
+  --foreground: #f2eaff;
+  --card: #100a1c;
+  --card-foreground: #f2eaff;
+  --primary: #fcee0a;
+  --primary-foreground: #120d00;
+  --secondary: #05d9e8;
+  --accent: #ff2a6d;
+  --muted: #1a1129;
+  --muted-foreground: #a99bc2;
+  --border: #2d1f45;
+  --radius: 0.25rem;
 }
 
 @layer base {
@@ -62,17 +62,17 @@
 
 .circuit-bg {
   background-image:
-    linear-gradient(rgba(34, 228, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 228, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(255, 42, 109, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 42, 109, 0.06) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
 .glow-text {
-  text-shadow: 0 0 24px rgba(34, 228, 255, 0.45);
+  text-shadow: 0 0 24px rgba(252, 238, 10, 0.35);
 }
 
 .neon-border {
-  box-shadow: 0 0 0 1px rgba(34, 228, 255, 0.25), 0 0 24px -8px rgba(34, 228, 255, 0.5);
+  box-shadow: 0 0 0 1px rgba(5, 217, 232, 0.3), 0 0 28px -8px rgba(255, 42, 109, 0.55);
 }
 
 @keyframes float {
@@ -96,9 +96,45 @@
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.is-visible { opacity: 1; transform: none; }
 
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 3px);
+}
+
+.cyber-clip {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+@keyframes glitch {
+  0%, 86%, 100% { text-shadow: 0 0 24px rgba(252, 238, 10, 0.35); transform: none; }
+  88% { text-shadow: -3px 0 #ff2a6d, 3px 0 #05d9e8; transform: translateX(2px) skewX(-4deg); }
+  90% { text-shadow: 3px 0 #ff2a6d, -3px 0 #05d9e8; transform: translateX(-2px); }
+  92% { text-shadow: -2px 1px #05d9e8, 2px -1px #ff2a6d; transform: none; }
+}
+@keyframes spin-wheel { to { transform: rotate(360deg); } }
+@keyframes sonar {
+  0% { transform: scale(0.4); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+@keyframes flow { to { stroke-dashoffset: -24; } }
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+.glitch { animation: glitch 4s steps(1) infinite; }
+.sonar-wave { transform-box: fill-box; transform-origin: center bottom; animation: sonar 1.6s ease-out infinite; }
+.wire-flow { animation: flow 0.8s linear infinite; }
+.eye-blink { transform-box: fill-box; transform-origin: center; animation: blink 4s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .animate-float, .particle, .hotspot-ring { animation: none; }
+  .animate-float, .particle, .hotspot-ring, .glitch, .sonar-wave, .wire-flow, .eye-blink { animation: none; }
+  .wheel-spin { animation: none !important; }
   .particle { display: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }

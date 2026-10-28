@@ -36,8 +36,8 @@ export function About() {
         <svg viewBox="0 0 400 300" className="neon-border w-full rounded-xl bg-card/60" role="img" aria-label="Circuit board illustration">
           <defs>
             <linearGradient id="trace" x1="0" x2="1">
-              <stop offset="0" stopColor="#22e4ff" />
-              <stop offset="1" stopColor="#9b5cff" />
+              <stop offset="0" stopColor="#05d9e8" />
+              <stop offset="1" stopColor="#ff2a6d" />
             </linearGradient>
           </defs>
           <g fill="none" stroke="url(#trace)" strokeWidth="2" opacity="0.8">
@@ -48,18 +48,18 @@ export function About() {
             <path d="M380 150 H240" />
             <path d="M380 230 H300 L270 200 H240" />
           </g>
-          <rect x="160" y="90" width="80" height="120" rx="8" fill="#0d1630" stroke="#22e4ff" strokeWidth="2" />
+          <rect x="160" y="90" width="80" height="120" rx="8" fill="#140a24" stroke="#05d9e8" strokeWidth="2" />
           {[0, 1, 2, 3, 4].map((i) => (
             <g key={i}>
-              <rect x="150" y={100 + i * 22} width="10" height="6" fill="#22e4ff" />
-              <rect x="240" y={100 + i * 22} width="10" height="6" fill="#9b5cff" />
+              <rect x="150" y={100 + i * 22} width="10" height="6" fill="#05d9e8" />
+              <rect x="240" y={100 + i * 22} width="10" height="6" fill="#ff2a6d" />
             </g>
           ))}
-          <text x="200" y="155" textAnchor="middle" fill="#e6f1ff" fontSize="12" fontFamily="monospace">ROBOTiX</text>
+          <text x="200" y="155" textAnchor="middle" fill="#f2eaff" fontSize="12" fontFamily="monospace">ROBOTiX</text>
           {[
             [20, 60], [20, 150], [20, 240], [380, 70], [380, 150], [380, 230],
           ].map(([x, y]) => (
-            <circle key={`${x}-${y}`} cx={x} cy={y} r="5" fill="#ff3fd0" />
+            <circle key={`${x}-${y}`} cx={x} cy={y} r="5" fill="#fcee0a" />
           ))}
         </svg>
       </div>

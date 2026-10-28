@@ -37,10 +37,20 @@ export function Countdown() {
     return () => clearInterval(id)
   }, [])
 
-  const formattedTarget =
+  const deadlineDetails =
     target === null
-      ? null
-      : new Intl.DateTimeFormat('en-IN', { dateStyle: 'full', timeStyle: 'short', timeZone: 'Asia/Kolkata' }).format(target)
+      ? []
+      : [
+          {
+            label: 'DATE',
+            value: new Intl.DateTimeFormat('en-IN', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' }).format(target),
+          },
+          {
+            label: 'TIME',
+            value: new Intl.DateTimeFormat('en-IN', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'Asia/Kolkata' }).format(target).toUpperCase(),
+          },
+          { label: 'ZONE', value: siteConfig.timezoneLabel },
+        ]
 
   return (
     <section id="countdown" aria-labelledby="countdown-title" className="mx-auto max-w-6xl px-4 py-24 md:px-6">
@@ -59,16 +69,21 @@ export function Countdown() {
               <CalendarClock className="size-4" aria-hidden="true" />
               {siteConfig.countdownLabel.toUpperCase()}
             </p>
-            <p className="mt-3 text-foreground">
-              {formattedTarget} · {siteConfig.timezoneLabel}
-            </p>
+            <dl className="mx-auto mt-5 grid max-w-2xl gap-2 sm:grid-cols-3">
+              {deadlineDetails.map((d) => (
+                <div key={d.label} className="cyber-clip border border-secondary/40 bg-secondary/5 px-4 py-3">
+                  <dt className="font-display text-[10px] tracking-[0.3em] text-secondary">{d.label}</dt>
+                  <dd className="mt-1 font-display text-sm font-bold text-foreground">{d.value}</dd>
+                </div>
+              ))}
+            </dl>
 
             {expired ? (
               <p className="mt-8 font-display text-3xl font-black tracking-widest text-accent md:text-5xl">REGISTRATION CLOSED</p>
             ) : (
               <div className="mx-auto mt-8 grid max-w-2xl grid-cols-4 gap-2 sm:gap-4" role="timer" aria-live="off">
                 {(remaining?.parts ?? ['Days', 'Hours', 'Minutes', 'Seconds'].map((label) => ({ label, value: 0 }))).map((p) => (
-                  <div key={p.label} className="rounded-lg border border-primary/30 bg-background/70 py-4 sm:py-6">
+                  <div key={p.label} className="cyber-clip border border-primary/40 bg-background/70 py-4 shadow-[inset_0_-3px_0_var(--accent)] sm:py-6">
                     <p className="font-display text-2xl font-bold tabular-nums text-primary sm:text-5xl">
                       {String(p.value).padStart(2, '0')}
                     </p>

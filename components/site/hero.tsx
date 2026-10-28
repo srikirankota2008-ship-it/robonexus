@@ -26,7 +26,7 @@ export function Hero() {
       <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:px-6">
         <div>
           <p className="font-display text-xs tracking-[0.35em] text-primary">ROBOTiX CLUB · NIT RAIPUR</p>
-          <h1 className="glow-text mt-4 font-display text-5xl font-black tracking-wider sm:text-7xl md:text-6xl lg:text-7xl xl:text-8xl">
+          <h1 className="glow-text glitch mt-4 font-display text-5xl font-black tracking-wider sm:text-7xl md:text-6xl lg:text-7xl xl:text-8xl">
             ROBO<span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">FEST</span>
           </h1>
           <p className="mt-6 font-display text-lg font-semibold tracking-[0.2em] text-foreground md:text-xl">
