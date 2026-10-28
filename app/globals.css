@@ -1,0 +1,104 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist), system-ui, sans-serif;
+  --font-display: var(--font-orbitron), var(--font-geist), sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--primary);
+  --color-destructive: oklch(0.6 0.22 25);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  color-scheme: dark;
+  --background: #05070f;
+  --foreground: #e6f1ff;
+  --card: #0a1022;
+  --card-foreground: #e6f1ff;
+  --primary: #22e4ff;
+  --primary-foreground: #03121a;
+  --secondary: #9b5cff;
+  --accent: #ff3fd0;
+  --muted: #111a33;
+  --muted-foreground: #93a4c3;
+  --border: #1c2a4d;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/60;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+  }
+}
+
+.circuit-bg {
+  background-image:
+    linear-gradient(rgba(34, 228, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 228, 255, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.glow-text {
+  text-shadow: 0 0 24px rgba(34, 228, 255, 0.45);
+}
+
+.neon-border {
+  box-shadow: 0 0 0 1px rgba(34, 228, 255, 0.25), 0 0 24px -8px rgba(34, 228, 255, 0.5);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes drift {
+  from { transform: translateY(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  to { transform: translateY(-100vh); opacity: 0; }
+}
+@keyframes pulse-ring {
+  0% { r: 6; opacity: 0.9; }
+  100% { r: 16; opacity: 0; }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.particle { animation: drift linear infinite; }
+.hotspot-ring { animation: pulse-ring 1.8s ease-out infinite; }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-float, .particle, .hotspot-ring { animation: none; }
+  .particle { display: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
